@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  namespace: hongspace
+  generateName: hong-cicd-run- # make name automate with random index ( for re use pipelinerun yaml )
+spec:
+  serviceAccountName: build-bot # sa for git credientials -> pipeline will use for clone private repo
+  pipelineRef: # select pipeline
+    name: hong-cicd
+  podTemplate: # setting taskpod
+    securityContext:  # pod security
+      fsGroup: 65532 # set volume owner gid = 65532
+  workspaces: # volume for clone code
+  - name: shared-data
+    volumeClaimTemplate: # automatically create pvc -> create pv
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+ 
+  params: # git address
+  - name: repo-url
+    value: "https://github.com/lijahong/tektontest.git"
+  - name: image-reference
+    value: lijahong/tektontest:1.8
+  - name: kubectl-args
+    value:
+      - "apply"
+      - "-f"
+      - "test.yaml"
