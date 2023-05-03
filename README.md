@@ -67,8 +67,8 @@
 
 #### auth Directory : Tekton Pipeline 실행에 필요한 인증 & 권한 정보
 > - auth-sa.yaml : Tekton Pipeline 실행에 사용할 ServiceAccount 파일
-> - dockerhub/docker-config-se.yaml : DockerHub Private Repo 접근에 필요한 인증 정보를 담은 Secrets 파일
-> - github/github-secret.yaml : Github Private Repo 접근에 필요한 인증 정보를 담은 Secrets 파일
+> - dockerhub/docker-config-se.yaml : DockerHub Private Repo 접근에 필요한 인증 정보를 담은 Secrets 파일. dockerconfig.json 정보를 입력해야 한다
+> - github/github-secret.yaml : Github Private Repo 접근에 필요한 인증 정보를 담은 Secrets 파일. GitHub Access Token 정보를 입력해야 한다
 > - rbac/clusterole.yaml : Kubernetes Cluster에 배포하기 위한 권한 정보를 담은 ClusterRole 파일
 > - rbac/clusterrolebind.yaml : auth-sa와 clusterole을 Bind 하기 위한 ClusterRoleBinding 파일
 
