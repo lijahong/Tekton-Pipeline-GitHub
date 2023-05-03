@@ -1,9 +1,11 @@
 # Tekton-Pipeline-Project
-#### [ 상세 내용 링크 ](https://velog.io/@lijahong/series/0%EB%B6%80%ED%84%B0-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-TEKTON-%EA%B3%B5%EB%B6%80)
 
-### Project 설명
+---
+
+## Project 설명
 
 #### Tekton을 이용한 Pipeline 구축 &amp; Trigger를 이용한 Pipeline 자동 실행
+> #### [ 상세 내용 링크 ](https://velog.io/@lijahong/series/0%EB%B6%80%ED%84%B0-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-TEKTON-%EA%B3%B5%EB%B6%80)
 
 #### 사용 Repository
 > - Code Repository : GitHub Private Repo
@@ -21,7 +23,7 @@
 
 ---
 
-### 파일 설명
+## 파일 설명
 
 ```shell
 ├── auth
@@ -56,3 +58,34 @@
     ├── trigerbinding.yaml
     └── trigertemplate.yaml
 ```
+> - 전체 파일 구조는 위와 같다
+
+#### 실행 Script
+> - authapply.sh : Tekton Pipeline & Trigger를 위한 인증 정보 배포
+> - setpipeline.sh : Tekton Pipeline & Trigger 배포
+> - delete.sh : Tekton Pipeline & Trigger 삭제 및 배포한 Deployment & Service 삭제 
+
+#### auth Directory : Tekton Pipeline 실행에 필요한 인증 & 권한 정보
+> - auth-sa.yaml : Tekton Pipeline 실행에 사용할 ServiceAccount 파일
+> - dockerhub/docker-config-se.yaml : DockerHub Private Repo 접근에 필요한 인증 정보를 담은 Secrets 파일
+> - github/github-secret.yaml : Github Private Repo 접근에 필요한 인증 정보를 담은 Secrets 파일
+> - rbac/clusterole.yaml : Kubernetes Cluster에 배포하기 위한 권한 정보를 담은 ClusterRole 파일
+> - rbac/clusterrolebind.yaml : auth-sa와 clusterole을 Bind 하기 위한 ClusterRoleBinding 파일
+
+#### pipeline Directory : Pipeline & PipelineRun 정보
+> - pipeline/pipeline.yaml : 구축한 Pipeline 파일
+> - pipeline/pipelineRun.yaml : Pipeline을 실행하기 위한 PipelineRun 파일. Trigger 구축 후에는 사용하지 않는다
+
+#### task Directory : Task 정보
+> - task/gitclone.yaml : Git Clone 하기 위한 Task 파일
+> - task/kaniko.yaml : Image Build & Push 하기 위한 Task 파일
+> - task/kubecommand.yaml : Kubernetes Cluster에 배포하기 위한 파일
+
+#### trigger Directory : Trigger 정보
+> - trigger/auth-trigger/role.yaml : EventListener Pod를 실행하기 위한 권한 정보를 담은 role & ClusterRole 파일
+> - trigger/auth-trigger/rolebinding.yaml : role과 sa-trigger를 Bind 하기 위한 RoleBinding & ClusterRoleBinding 파일
+> - trigger/auth-trigger/sa-trigger.yaml : EventListener Pod를 실행하기 위한 ServiceAccount 파일
+> - trigger/eventlistener.yaml : 외부에서 Event를 받아 Trigger를 작동시키는 EventListener 파일
+> - trigger/trigerbinding.yaml : Event Data ( Json Payload )와 TriggerTemplate의 파라미터를 매핑하기 위한 TriggerBinding 파일
+> - trigger/trigertemplate.yaml : 넘겨 받은 파라미터를 이용해 어떤 Pipeline을 실행시킬건지 정의한 TriggerTemplate 파일
+> - trigger/ingress-trigger.yaml : EventListener를 외부에 노출하기 위한 Ingress 파일
