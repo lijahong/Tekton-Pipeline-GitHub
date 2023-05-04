@@ -60,6 +60,9 @@
 ```
 > - 전체 파일 구조는 위와 같다
 
+#### Ingress
+> - ingress-ttdashboard.yaml : Tekton DashBoard를 외부 노출하기 위한 Ingress 파일
+
 #### 실행 Script
 > - authapply.sh : Tekton Pipeline & Trigger를 위한 인증 정보 배포
 > - setpipeline.sh : Tekton Pipeline & Trigger 배포
