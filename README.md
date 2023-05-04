@@ -40,6 +40,7 @@
 │       └── clusterrolebind.yaml
 ├── authapply.sh
 ├── delete.sh
+├── ingress-ttdashboard.yaml
 ├── pipeline
 │   ├── pipeline.yaml
 │   └── pipelineRun.yaml
