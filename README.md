@@ -32,9 +32,6 @@
 │   │   └── docker-config-se.yaml
 │   ├── github
 │   │   └── github-secret.yaml
-│   ├── gitlab
-│   │   ├── git-ssl-se.yaml
-│   │   └── gitlab-se.yaml
 │   └── rbac
 │       ├── clusterole.yaml
 │       └── clusterrolebind.yaml
